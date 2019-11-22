@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.any.ktplugin"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation(name: 'an-release', ext: 'aar')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //引入插件库
+    implementation project(':event')
+}
+
+
+// 引入自定义插件
+
+apply plugin: com.any.gradle.MyCustomPlugin
+
+//apply plugin: 'com.any.plugin'
+
+ak {
+    debug = true
+    excludeClass = ["com.any.ktplugin.NDoubleClickListener","com.any.ktplugin.DoMainJava"]
+//    includeClass = []
+    eventList = ["onClick(Landroid/view/View;)V","onResume()V", "invoke(Landroid/view/View;)V", "onNavigationItemSelected(Landroid/view/MenuItem;)Z", "<init>()V"]
+    packageName = ["com.any.ktplugin","com.any.ktplugin.bean","com.any.an"]
+    annotationName = ["com.any.event.anno.KAnn", "com.any.event.anno.KEvent"]
+}
