@@ -1,8 +1,6 @@
 package com.any.event.log
 
 import android.util.Log
-import com.any.event.BuildConfig
-
 /**
  *
  * @author any

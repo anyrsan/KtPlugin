@@ -7,13 +7,14 @@ import com.any.event.log.Log
  *
  * @author any
  * @time 2019/07/29 19.57
- * @details
+ * @details 事件核心类， 通过 字节码 调用，  提供事件记录方法，提供方法耗时输出
  */
 object EventManager {
 
     private val eMap = mutableMapOf<String, Long>()
     //执行这个方法加入数据
     fun addEvent(value: String, eventName: String) {
+        // todo 可以完成实际逻辑处理
         Log.e("$eventName ...  $value")
     }
 
