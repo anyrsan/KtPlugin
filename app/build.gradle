@@ -47,17 +47,26 @@ dependencies {
 }
 
 
-// 引入自定义插件
+// 引入自定义插件 这种buildSrc可以引入
+//apply plugin: com.any.gradle.MyCustomPlugin
 
-apply plugin: com.any.gradle.MyCustomPlugin
-
-//apply plugin: 'com.any.plugin'
+//引入 插件
+apply plugin: 'com.any.plugin'
 
 ak {
     debug = true
-    excludeClass = ["com.any.ktplugin.NDoubleClickListener","com.any.ktplugin.DoMainJava"]
+    excludeClass = ["com.any.ktplugin.NDoubleClickListener", "com.any.ktplugin.DoMainJava"]
 //    includeClass = []
-    eventList = ["onClick(Landroid/view/View;)V","onResume()V", "invoke(Landroid/view/View;)V", "onNavigationItemSelected(Landroid/view/MenuItem;)Z", "<init>()V"]
-    packageName = ["com.any.ktplugin","com.any.ktplugin.bean","com.any.an"]
+    eventList = ["onClick(Landroid/view/View;)V", "onResume()V", "invoke(Landroid/view/View;)V", "onNavigationItemSelected(Landroid/view/MenuItem;)Z", "<init>()V"]
+    packageName = ["com.any.ktplugin", "com.any.ktplugin.bean", "com.any.an"]
     annotationName = ["com.any.event.anno.KAnn", "com.any.event.anno.KEvent"]
 }
+
+// 引入 插件
+apply plugin: 'com.any.org.plugin'
+
+testAk {
+
+
+}
+

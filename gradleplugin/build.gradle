@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenLocal()
     }
 
     dependencies {
@@ -22,7 +23,7 @@ apply plugin: 'kotlin'
 apply plugin: 'maven'
 
 sourceSets {
-    main.kotlin.srcDirs += 'com.any.gradle'
+    main.kotlin.srcDirs += 'com.any.org.gradleplugin'
 }
 
 dependencies {
@@ -33,20 +34,18 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-
-group='com.any.plugin'
-version='1.0.1'
-archivesBaseName='anyKt'
-
-
+// 将会安装到本地maven仓  （task  ->  install ）
 install {
     repositories.mavenInstaller {
-        pom.version = version
-        pom.artifactId = archivesBaseName
-        pom.groupId = group
+        pom.version = '1.0.0'
+        pom.artifactId = 'testKt'
+        pom.groupId = 'com.any.org.plugin'
     }
 }
 
+//group='com.any.org.plugin'
+//version='1.0.0'
+//archivesBaseName='testKt'
 //uploadArchives {
 //    repositories {
 //        mavenDeployer {
